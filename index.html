@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Yankuan Zhang">
+    <title>Avatartist</title>
+    <link rel='shortcut icon' href='favicon.ico' type='image/x-icon' />
+    <style>
+        html {
+            font-size: 100%;
+        }
+        
+        @media(min-width:500px) {
+            html {
+                font-size: 200%
+            }
+        }
+        
+        * {
+            /*            font-size: 14px;*/
+            text-align: center;
+            margin: 10px auto 10px auto;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        
+        #canvasImage {
+            border-style: solid;
+            border-width: thin;
+            margin: 10px;
+        }
+        /*
+        #textContainer {
+            display: block;
+        }
+*/
+        
+        li {
+            text-align: left;
+            height: 1.2;
+            display: inline;
+        }
+        
+        #uploadImage,
+        #submit {}
+        
+        #uploadImage {
+            /*            width: 83px;*/
+        }
+        
+        .fileUpload {
+            position: relative;
+            overflow: hidden;
+            margin: 10px;
+        }
+        
+        input.button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            height: 50px;
+            width:100px;
+            cursor: pointer;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            border:none; 
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 6px 16px;
+            font-size: 24px;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            touch-action: manipulation;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: white;
+            background-color: #c9302c;
+        }
+        
+        .btn:hover {
+            background-color: #a9100c;
+        }
+        
+        .btn:active {
+            background-color: #99000c;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #838383;
+        }
+        
+        #ack {
+            font-size: 14px;
+        }
+    </style>
+
+</head>
+
+<body onload="preload()">
+    <div id="main">
+                <h1>Two steps to feature your avatar!</h1>
+        <div id="desc">
+            
+        </div>
+        <div class="fileUpload btn">
+            <span>上传</span>
+            <input type="file" class="button" id="uploadImage" accept="image/*" onchange="previewImage()" />
+        </div>
+        <br>
+        <a id="downloadImage">
+            <canvas id="canvas" width="750" height="750"></canvas>
+        </a>
+        <br>
+        <div class="fileUpload btn">
+            <span>处理</span>
+            <input id="submit" class="button" type="submit" onclick="doit()" />
+        </div>
+    </div>
+        <hr>
+
+    <div id="ack">
+        <br>
+        <span>想为这个项目捐赠，可添加<a href="http://weibo.com/340126502"> @LexiCAholic </a>为微信好友（然后怒发红包！）：</span>
+        <div>
+            <img src ="wechat.jpg" />
+        </div>
+        <span>致谢：<a href="http://weibo.com/u/1056110090">@丹書墨寫</a>（素材创意），<a href="http://weibo.com/u/1159680395">@Jayden大爱IMAX</a>（代码调试）</span>
+        <br>
+    </div>
+    <script>
+        function preload() {
+
+            // global context
+            canvas = document.getElementById('canvas');
+            context = canvas.getContext('2d');
+            cW = canvas.width;
+            cH = canvas.height;
+
+            var bk = new Image();
+            var fr = new Image();
+
+            bk.src = "bk750.jpg";
+            bk.onload = function() {
+                context.drawImage(bk, 0, 0, cW, cH);
+                bkDataArray = context.getImageData(0, 0, cW, cH).data; //.slice(0);
+                context.clearRect(0, 0, cW, cH);
+            }
+
+            fr.src = "fr750.jpg";
+            fr.onload = function() {
+                context.drawImage(fr, 0, 0, cW, cH);
+                frDataArray = context.getImageData(0, 0, cW, cH).data; //.slice(0);
+                context.clearRect(0, 0, cW, cH);
+            }
+
+            // notification
+            console.log("two gound images are ready.");
+
+            // disable "submit" button
+            document.getElementById("submit").disabled = true;
+            document.getElementById("downloadImage").disabled = true;
+            
+            
+        }
+
+        function previewImage() {
+            var im = new Image();
+
+            var oFReader = new FileReader();
+            oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+            filename = document.getElementById("uploadImage").files[0].name;
+            oFReader.onload = function(oFREvent) {
+                var userImageSrc = oFREvent.target.result;
+                im.src = userImageSrc;
+                im.onload = function() {
+                    context.drawImage(im, 0, 0, cW, cH);
+                    imDataArray = context.getImageData(0, 0, cW, cH).data; //.slice(0);
+                }
+            }
+            document.getElementById("downloadImage").removeAttribute("downloadImage");
+            document.getElementById("downloadImage").removeAttribute("href");
+            // now user can submit
+            document.getElementById("submit").disabled = false;
+            //            document.getElementById("downloadImage").disabled = true;
+            
+        }
+
+        function doit() {
+
+            // core algorithm
+            for (var i = 0; i < imDataArray.length; i++) {
+                if (imDataArray[i] < 170) { // this value is proposed by Jibin
+                    imDataArray[i] = frDataArray[i];
+                } else {
+                    imDataArray[i] = bkDataArray[i];
+                }
+            }
+
+            // notification
+            console.log("new image is computed.");
+
+            context.clearRect(0, 0, cW, cH);
+
+            // output image to canvas
+            context.putImageData(new ImageData(imDataArray, cW, cH), 0, 0, 0, 0, cW, cH);
+
+            // preview in thrumbnail
+            //            document.getElementById("test").src = canvas.toDataURL();
+            document.getElementById("downloadImage").href = canvas.toDataURL('image/jpeg', 0.5);
+            document.getElementById("downloadImage").download = "HCNY_" + filename;
+
+            // cannot resubmit
+            document.getElementById("submit").disabled = true;
+            document.getElementById("downloadImage").disabled = false;
+        }
+    </script>
+</body>
+
+</html>
+
+<!--
+canvas.toDataURL('image/jpeg', quality)
+Creates a JPG image. Optionally, you can provide a quality in the range from 0 to 1, with one being the best quality and with 0 almost not recognizable but small in file size.
+Once you have generated a data URI from you canvas, you are able to use it as the source of any <image> or put it into a hyper link with a download attribute to save it to disc, for example.
+
+https://github.com/blueimp/JavaScript-Load-Image
+-->
