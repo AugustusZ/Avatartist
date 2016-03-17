@@ -62,11 +62,11 @@
             padding: 0;
             font-size: 20px;
             height: 50px;
-            width:100px;
+            width: 100px;
             cursor: pointer;
             opacity: 0;
             filter: alpha(opacity=0);
-            border:none; 
+            border: none;
         }
         
         .btn {
@@ -101,18 +101,19 @@
         #ack {
             font-size: 14px;
         }
+
     </style>
 
 </head>
 
 <body onload="preload()">
     <div id="main">
-                <h1>Two steps to feature your avatar!</h1>
+        <h1>Two steps to feature your avatar!</h1>
         <div id="desc">
-            
+
         </div>
         <div class="fileUpload btn">
-            <span>上传</span>
+            <span>Upload</span>
             <input type="file" class="button" id="uploadImage" accept="image/*" onchange="previewImage()" />
         </div>
         <br>
@@ -121,19 +122,18 @@
         </a>
         <br>
         <div class="fileUpload btn">
-            <span>处理</span>
+            <span>Process</span>
             <input id="submit" class="button" type="submit" onclick="doit()" />
         </div>
     </div>
-        <hr>
+    <hr>
 
     <div id="ack">
         <br>
-        <span>想为这个项目捐赠，可添加<a href="http://weibo.com/340126502"> @LexiCAholic </a>为微信好友（然后怒发红包！）：</span>
+        <span>Scan the QR-code to donate for this project</span>
         <div>
-            <img src ="wechat.jpg" />
+            <img src="wechat.jpg" />
         </div>
-        <span>致谢：<a href="http://weibo.com/u/1056110090">@丹書墨寫</a>（素材创意），<a href="http://weibo.com/u/1159680395">@Jayden大爱IMAX</a>（代码调试）</span>
         <br>
     </div>
     <script>
@@ -168,8 +168,8 @@
             // disable "submit" button
             document.getElementById("submit").disabled = true;
             document.getElementById("downloadImage").disabled = true;
-            
-            
+
+
         }
 
         function previewImage() {
@@ -191,7 +191,7 @@
             // now user can submit
             document.getElementById("submit").disabled = false;
             //            document.getElementById("downloadImage").disabled = true;
-            
+
         }
 
         function doit() {
@@ -222,6 +222,7 @@
             document.getElementById("submit").disabled = true;
             document.getElementById("downloadImage").disabled = false;
         }
+
     </script>
 </body>
 
