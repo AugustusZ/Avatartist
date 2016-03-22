@@ -11,9 +11,12 @@
             font-size: 100%;
         }
         
-        @media(min-width:500px) {
+        @media (max-width:480px) {
             html {
                 font-size: 200%
+            }
+            body {
+                background-color: darkseagreen;
             }
         }
         
@@ -112,25 +115,31 @@
         <div id="desc">
 
         </div>
-        <div class="fileUpload btn">
-            <span>Upload</span>
-            <input type="file" class="button" id="uploadImage" accept="image/*" onchange="previewImage()" />
+        <div id="uploaddiv">
+            <div class="fileUpload btn">
+                <span>Upload</span>
+                <input type="file" class="button" id="uploadImage" accept="image/*" onchange="previewImage()" />
+            </div>
         </div>
         <br>
         <a id="downloadImage">
             <canvas id="canvas" width="750" height="750"></canvas>
         </a>
         <br>
-        <div class="fileUpload btn">
-            <span>Process</span>
-            <input id="submit" class="button" type="submit" onclick="doit()" />
+        <div id="submitdiv">
+            <div class="fileUpload btn">
+                <span>Process</span>
+                <input id="submit" class="button" type="submit" onclick="doit()" />
+            </div>
         </div>
     </div>
-    <hr>
 
     <div id="ack">
+        <h2>Click / tap image to save!</h2>
         <br>
-        <span>Scan the QR-code to donate for this project</span>
+        <hr>
+        <br>
+        <span>Scan the QR-code to donate for this project on Wechat</span>
         <div>
             <img src="wechat.jpg" />
         </div>
@@ -169,6 +178,11 @@
             document.getElementById("submit").disabled = true;
             document.getElementById("downloadImage").disabled = true;
 
+            // hide them
+            document.getElementById("submitdiv").style.display = "none";
+            document.getElementById("downloadImage").style.display = "none";
+            document.getElementById("ack").style.display = "none";
+
 
         }
 
@@ -190,8 +204,10 @@
             document.getElementById("downloadImage").removeAttribute("href");
             // now user can submit
             document.getElementById("submit").disabled = false;
-            //            document.getElementById("downloadImage").disabled = true;
 
+            // show them
+            document.getElementById("submitdiv").style.display = "initial";
+            document.getElementById("downloadImage").style.display = "initial";
         }
 
         function doit() {
@@ -221,6 +237,9 @@
             // cannot resubmit
             document.getElementById("submit").disabled = true;
             document.getElementById("downloadImage").disabled = false;
+            document.getElementById("ack").style.display = "initial";
+            document.getElementById("downloadImage").style.display = "initial";
+            document.getElementById("submitdiv").style.display = "none";
         }
 
     </script>
