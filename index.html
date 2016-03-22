@@ -132,11 +132,17 @@
                 <input id="submit" class="button" type="submit" onclick="doit()" />
             </div>
         </div>
+        <br>
+        <div id="savediv">
+            <a id="saveanchor">
+                <div class="fileUpload btn">
+                    <span>Save</span>
+                </div>
+            </a>
+        </div>
     </div>
 
     <div id="ack">
-        <h2>Click / tap image to save!</h2>
-        <br>
         <hr>
         <br>
         <span>Scan the QR-code to donate for this project on Wechat</span>
@@ -180,6 +186,7 @@
 
             // hide them
             document.getElementById("submitdiv").style.display = "none";
+            document.getElementById("savediv").style.display = "none";
             document.getElementById("downloadImage").style.display = "none";
             document.getElementById("ack").style.display = "none";
 
@@ -229,10 +236,11 @@
             // output image to canvas
             context.putImageData(new ImageData(imDataArray, cW, cH), 0, 0, 0, 0, cW, cH);
 
-            // preview in thrumbnail
-            //            document.getElementById("test").src = canvas.toDataURL();
             document.getElementById("downloadImage").href = canvas.toDataURL('image/jpeg', 0.5);
             document.getElementById("downloadImage").download = "HCNY_" + filename;
+
+            document.getElementById("saveanchor").href = canvas.toDataURL('image/jpeg', 0.5);
+            document.getElementById("saveanchor").download = "HCNY_" + filename;
 
             // cannot resubmit
             document.getElementById("submit").disabled = true;
@@ -240,6 +248,7 @@
             document.getElementById("ack").style.display = "initial";
             document.getElementById("downloadImage").style.display = "initial";
             document.getElementById("submitdiv").style.display = "none";
+            document.getElementById("savediv").style.display = "initial";
         }
 
     </script>
