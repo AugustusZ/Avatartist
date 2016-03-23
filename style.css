@@ -1,7 +1,40 @@
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+    .icon {
+        width: 128px;
+        height: 128px;
+        margin: 10px;
+        background-size: 128px 128px;
+    }
+    input.button {
+        height: 148px;
+        width: 148px;
+    }
     body {
         background-color: #fefefe;
-        font-size: 300%;
+        font-size: 200%;
+    }
+    #header {
+        width: 300px;
+    }
+}
+
+@media only screen and (min-device-width: 569px) {
+    .icon {
+        width: 64px;
+        height: 64px;
+        margin: 5px;
+        background-size: 64px 64px;
+    }
+    input.button {
+        height: 74px;
+        width: 74px;
+    }
+    body {
+        background-color: #fefefe;
+        font-size: 100%;
+    }
+    #header {
+        width: 500px;
     }
 }
 
@@ -12,9 +45,14 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-#header {
-    margin-top: 250px;
-    width: 500px;
+#main {
+    height: 1120px;
+    position: relative;
+}
+
+#opendiv {
+    top: 25%;
+    position: relative;
 }
 
 #canvas {
@@ -34,10 +72,10 @@
 }
 
 .icon {
-    width: 128px;
-    height: 128px;
-    margin: 10px;
-    background-size: 128px 128px;
+    /*    width: 64px;*/
+    /*    height: 64px;*/
+    /*    margin: 5px;*/
+    /*    background-size: 64px 64px;*/
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -45,7 +83,6 @@
 .fileUpload {
     position: relative;
     overflow: hidden;
-    /*    margin: 10px;*/
 }
 
 input.button {
@@ -54,18 +91,17 @@ input.button {
     right: 0;
     margin: 0;
     padding: 0;
-    height: 148px;
-    width: 148px;
+    /*    height: 74px;*/
+    /*    width: 74px;*/
     cursor: pointer;
     opacity: 0;
-    filter: alpha(opacity=0);
     border: none;
 }
 
 .btn {
     display: inline-block;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;

@@ -10,156 +10,159 @@
 </head>
 
 <body onload="preload()">
-    <div id="main">
-        <h1 id="header">Feature your avatar online!</h1>
+    <div id="bodydiv">
+        <div id="main">
+            <div id="opendiv">
+                <h1 id="header">Feature Your Avatars Online</h1>
+                <div class="desc">
+                    <br>
+                </div>
+                <div id="uploaddiv">
+                    <div class="fileUpload btn">
+                        <div id="uploadicon" class="icon"></div>
+                        <input type="file" class="button" id="uploadImage" accept="image/*" onchange="previewImage()" />
+                    </div>
+                </div>
+            </div>
+            <div id="canvasdiv">
+                <canvas id="canvas" width="750" height="750"></canvas>
+            </div>
+
+            <div id="submitdiv">
+                <div class="fileUpload btn">
+                    <div id="processicon" class="icon"></div>
+                    <input id="submit" class="button" type="submit" onclick="doit()" />
+                </div>
+            </div>
+            <div id="savediv">
+                <a id="saveanchor">
+                    <div class="fileUpload btn">
+                        <div id="saveicon" class="icon"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
         <div class="desc">
             <br>
         </div>
-        <div id="uploaddiv">
-            <div class="fileUpload btn">
-                <!--                <span>Upload</span>-->
-                <div id="uploadicon" class="icon"></div>
-                <input type="file" class="button" id="uploadImage" accept="image/*" onchange="previewImage()" />
+        <div id="ack">
+
+            <hr>
+            <br>
+            <span>Scan to donate for this project on Wechat</span>
+            <div>
+                <img src="wechat.jpg" />
             </div>
+            <br>
         </div>
+        <script>
+            function preload() {
 
-        <div id="canvasdiv">
-            <canvas id="canvas" width="750" height="750"></canvas>
-        </div>
+                // global context
+                canvas = document.getElementById('canvas');
+                context = canvas.getContext('2d');
+                cW = canvas.width;
+                cH = canvas.height;
 
-        <div id="submitdiv">
-            <div class="fileUpload btn">
-                <!--                <span>Process</span>-->
-                <div id="processicon" class="icon"></div>
-                <input id="submit" class="button" type="submit" onclick="doit()" />
-            </div>
-        </div>
-        <div id="savediv">
-            <a id="saveanchor">
-                <div class="fileUpload btn">
-                    <div id="saveicon" class="icon"></div>
-                </div>
-            </a>
-        </div>
-    </div>
-    <div class="desc">
-        <br>
-    </div>
-    <div id="ack">
-        <br>
-        <hr>
-        <br>
-        <span>Scan to donate for this project on Wechat</span>
-        <div>
-            <img src="wechat.jpg" />
-        </div>
-        <br>
-    </div>
-    <script>
-        function preload() {
+                var bk = new Image();
+                var fr = new Image();
 
-            // global context
-            canvas = document.getElementById('canvas');
-            context = canvas.getContext('2d');
-            cW = canvas.width;
-            cH = canvas.height;
+                bk.src = "bk750.jpg";
+                bk.onload = function() {
+                    context.drawImage(bk, 0, 0, cW, cH);
+                    bkDataArray = context.getImageData(0, 0, cW, cH).data; //.slice(0);
+                    context.clearRect(0, 0, cW, cH);
+                }
 
-            var bk = new Image();
-            var fr = new Image();
+                fr.src = "fr750.jpg";
+                fr.onload = function() {
+                    context.drawImage(fr, 0, 0, cW, cH);
+                    frDataArray = context.getImageData(0, 0, cW, cH).data; //.slice(0);
+                    context.clearRect(0, 0, cW, cH);
+                }
 
-            bk.src = "bk750.jpg";
-            bk.onload = function() {
-                context.drawImage(bk, 0, 0, cW, cH);
-                bkDataArray = context.getImageData(0, 0, cW, cH).data; //.slice(0);
-                context.clearRect(0, 0, cW, cH);
+                // notification
+                console.log("two gound images are ready.");
+
+                // disable "submit" button
+                document.getElementById("submit").disabled = true;
+                //            document.getElementById("downloadImage").disabled = true;
+
+                // hide them
+                document.getElementById("submitdiv").style.display = "none";
+                document.getElementById("savediv").style.display = "none";
+                //            document.getElementById("downloadImage").style.display = "none";
+                document.getElementById("ack").style.display = "none";
+                document.getElementById("canvas").style.display = "none";
+
+
+
             }
 
-            fr.src = "fr750.jpg";
-            fr.onload = function() {
-                context.drawImage(fr, 0, 0, cW, cH);
-                frDataArray = context.getImageData(0, 0, cW, cH).data; //.slice(0);
-                context.clearRect(0, 0, cW, cH);
+            function previewImage() {
+                var im = new Image();
+
+                var oFReader = new FileReader();
+                oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+                filename = document.getElementById("uploadImage").files[0].name;
+                oFReader.onload = function(oFREvent) {
+                        var userImageSrc = oFREvent.target.result;
+                        im.src = userImageSrc;
+                        im.onload = function() {
+                            context.drawImage(im, 0, 0, cW, cH);
+                            imDataArray = context.getImageData(0, 0, cW, cH).data; //.slice(0);
+                        }
+                    }
+                    //            document.getElementById("downloadImage").removeAttribute("downloadImage");
+                    //            document.getElementById("downloadImage").removeAttribute("href");
+                    // now user can submit
+                document.getElementById("submit").disabled = false;
+
+                // show them
+                document.getElementById("submitdiv").style.display = "initial";
+                document.getElementById("savediv").style.display = "none";
+                document.getElementById("canvas").style.display = "initial";
+                //            document.getElementById("downloadImage").style.display = "initial";
+                document.getElementById("header").style.display = "none";
+                document.getElementById("opendiv").style.top = "0%";
             }
 
-            // notification
-            console.log("two gound images are ready.");
+            function doit() {
 
-            // disable "submit" button
-            document.getElementById("submit").disabled = true;
-            //            document.getElementById("downloadImage").disabled = true;
-
-            // hide them
-            document.getElementById("submitdiv").style.display = "none";
-            document.getElementById("savediv").style.display = "none";
-            //            document.getElementById("downloadImage").style.display = "none";
-            document.getElementById("ack").style.display = "none";
-            document.getElementById("canvas").style.display = "none";
-
-
-        }
-
-        function previewImage() {
-            var im = new Image();
-
-            var oFReader = new FileReader();
-            oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
-            filename = document.getElementById("uploadImage").files[0].name;
-            oFReader.onload = function(oFREvent) {
-                    var userImageSrc = oFREvent.target.result;
-                    im.src = userImageSrc;
-                    im.onload = function() {
-                        context.drawImage(im, 0, 0, cW, cH);
-                        imDataArray = context.getImageData(0, 0, cW, cH).data; //.slice(0);
+                // core algorithm
+                for (var i = 0; i < imDataArray.length; i++) {
+                    if (imDataArray[i] < 170) { // this value is proposed by Jibin
+                        imDataArray[i] = frDataArray[i];
+                    } else {
+                        imDataArray[i] = bkDataArray[i];
                     }
                 }
-                //            document.getElementById("downloadImage").removeAttribute("downloadImage");
-                //            document.getElementById("downloadImage").removeAttribute("href");
-                // now user can submit
-            document.getElementById("submit").disabled = false;
 
-            // show them
-            document.getElementById("submitdiv").style.display = "initial";
-            document.getElementById("savediv").style.display = "none";
-            document.getElementById("canvas").style.display = "initial";
-            //            document.getElementById("downloadImage").style.display = "initial";
-            document.getElementById("header").style.display = "none";
-        }
+                // notification
+                console.log("new image is computed.");
 
-        function doit() {
+                context.clearRect(0, 0, cW, cH);
 
-            // core algorithm
-            for (var i = 0; i < imDataArray.length; i++) {
-                if (imDataArray[i] < 170) { // this value is proposed by Jibin
-                    imDataArray[i] = frDataArray[i];
-                } else {
-                    imDataArray[i] = bkDataArray[i];
-                }
+                // output image to canvas
+                context.putImageData(new ImageData(imDataArray, cW, cH), 0, 0, 0, 0, cW, cH);
+
+                //            document.getElementById("downloadImage").href = canvas.toDataURL('image/jpeg', 0.5);
+                //            document.getElementById("downloadImage").download = "HCNY_" + filename;
+
+                document.getElementById("saveanchor").href = canvas.toDataURL('image/jpeg', 0.6);
+                document.getElementById("saveanchor").download = "HCNY_" + filename;
+
+                // cannot resubmit
+                document.getElementById("submit").disabled = true;
+                //            document.getElementById("downloadImage").disabled = false;
+                document.getElementById("ack").style.display = "initial";
+                //            document.getElementById("downloadImage").style.display = "initial";
+                document.getElementById("submitdiv").style.display = "none";
+                document.getElementById("savediv").style.display = "initial";
             }
 
-            // notification
-            console.log("new image is computed.");
-
-            context.clearRect(0, 0, cW, cH);
-
-            // output image to canvas
-            context.putImageData(new ImageData(imDataArray, cW, cH), 0, 0, 0, 0, cW, cH);
-
-            //            document.getElementById("downloadImage").href = canvas.toDataURL('image/jpeg', 0.5);
-            //            document.getElementById("downloadImage").download = "HCNY_" + filename;
-
-            document.getElementById("saveanchor").href = canvas.toDataURL('image/jpeg', 0.6);
-            document.getElementById("saveanchor").download = "HCNY_" + filename;
-
-            // cannot resubmit
-            document.getElementById("submit").disabled = true;
-            //            document.getElementById("downloadImage").disabled = false;
-            document.getElementById("ack").style.display = "initial";
-            //            document.getElementById("downloadImage").style.display = "initial";
-            document.getElementById("submitdiv").style.display = "none";
-            document.getElementById("savediv").style.display = "initial";
-        }
-
-    </script>
+        </script>
+    </div>
 </body>
 
 </html>
