@@ -13,6 +13,9 @@
         background-color: #fefefe;
         font-size: 200%;
     }
+    #main {
+        height: 1130px;
+    }
     #header {
         width: 300px;
         line-height: 1.5
@@ -37,6 +40,9 @@
         background-color: #fefefe;
         font-size: 100%;
     }
+    #main {
+        height: 970px;
+    }
     #header {
         width: 500px;
     }
@@ -53,12 +59,11 @@
 }
 
 #main {
-    height: 1120px;
     position: relative;
 }
 
 #opendiv {
-    top: 25%;
+    top: 33%;
     position: relative;
 }
 
@@ -146,5 +151,6 @@ a {
 }
 
 #ack {
+    /*    margin-top: 100px;*/
     font-size: 14px;
 }
