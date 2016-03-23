@@ -12,39 +12,44 @@
 <body onload="preload()">
     <div id="main">
         <h1 id="header">Feature your avatar online!</h1>
-        <div id="desc">
+        <div class="desc">
             <br>
         </div>
         <div id="uploaddiv">
             <div class="fileUpload btn">
-                <span>Upload</span>
+                <!--                <span>Upload</span>-->
+                <div id="uploadicon" class="icon"></div>
                 <input type="file" class="button" id="uploadImage" accept="image/*" onchange="previewImage()" />
             </div>
         </div>
 
-        <!--        <a id="downloadImage">-->
-        <canvas id="canvas" width="750" height="750"></canvas>
-        <!--        </a>-->
-        <br>
+        <div id="canvasdiv">
+            <canvas id="canvas" width="750" height="750"></canvas>
+        </div>
+
         <div id="submitdiv">
             <div class="fileUpload btn">
-                <span>Process</span>
+                <!--                <span>Process</span>-->
+                <div id="processicon" class="icon"></div>
                 <input id="submit" class="button" type="submit" onclick="doit()" />
             </div>
         </div>
         <div id="savediv">
             <a id="saveanchor">
                 <div class="fileUpload btn">
-                    <span>Save</span>
+                    <div id="saveicon" class="icon"></div>
                 </div>
             </a>
         </div>
     </div>
-
+    <div class="desc">
+        <br>
+    </div>
     <div id="ack">
+        <br>
         <hr>
         <br>
-        <span>Scan the QR-code to donate for this project on Wechat</span>
+        <span>Scan to donate for this project on Wechat</span>
         <div>
             <img src="wechat.jpg" />
         </div>
@@ -117,7 +122,7 @@
             document.getElementById("savediv").style.display = "none";
             document.getElementById("canvas").style.display = "initial";
             //            document.getElementById("downloadImage").style.display = "initial";
-            document.getElementById("header").style.marginTop = "initial";
+            document.getElementById("header").style.display = "none";
         }
 
         function doit() {
