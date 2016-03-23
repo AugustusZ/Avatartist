@@ -1,108 +1,107 @@
- html {
-     font-size: 100%;
- }
- 
- @media (max-width:480px) {
-     html {
-         font-size: 200%
-     }
-     body {
-         background-color: #C0FFEE;
-     }
- }
- 
- * {
-     /*            font-size: 14px;*/
-     text-align: center;
-     margin: 10px auto 10px auto;
-     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
- }
- 
- #canvasImage {
-     border-style: solid;
-     border-width: thin;
-     margin: 10px;
- }
- 
- h1 {
-     margin-top: 250px;
- }
- 
- li {
-     text-align: left;
-     height: 1.2;
-     display: inline;
- }
- 
- #uploadImage,
- #submit {}
- 
- #uploadImage {
-     /*            width: 83px;*/
- }
- 
- .fileUpload {
-     position: relative;
-     overflow: hidden;
-     margin: 10px;
- }
- 
- input.button {
-     position: absolute;
-     top: 0;
-     right: 0;
-     margin: 0;
-     padding: 0;
-     font-size: 20px;
-     height: 50px;
-     width: 100px;
-     cursor: pointer;
-     opacity: 0;
-     filter: alpha(opacity=0);
-     border: none;
- }
- 
- .btn {
-     display: inline-block;
-     padding: 6px 16px;
-     font-size: 24px;
-     line-height: 1.42857143;
-     text-align: center;
-     white-space: nowrap;
-     vertical-align: middle;
-     touch-action: manipulation;
-     cursor: pointer;
-     border: 1px solid transparent;
-     border-radius: 4px;
-     color: white;
-     background-color: #c9302c;
- }
- 
- .btn:hover {
-     background-color: #a9100c;
- }
- 
- .btn:active {
-     background-color: #99000c;
- }
- 
- #savediv .btn {
-     background-color: #f9e000;
- }
- 
- #savediv .btn:hover {
-     background-color: #f5d500;
- }
- 
- #savediv .btn:active {
-     background-color: #e5c500;
- }
- 
- a {
-     text-decoration: none;
-     color: #838383;
- }
- 
- #ack {
-     font-size: 14px;
- }
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+    body {
+        background-color: #fefefe;
+        font-size: 300%;
+    }
+}
+
+html {
+    font-size: 100%;
+}
+
+* {
+    /*            font-size: 14px;*/
+    text-align: center;
+    margin: 10px auto 10px auto;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#canvasImage {
+    border-style: solid;
+    border-width: thin;
+    margin: 10px;
+}
+
+#header {
+    margin-top: 250px;
+    width: 500px;
+}
+
+li {
+    text-align: left;
+    height: 1.2;
+    display: inline;
+}
+
+#uploadImage,
+#submit {}
+
+#uploadImage {
+    /*            width: 83px;*/
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+
+input.button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    height: 50px;
+    width: 100px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    border: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 16px;
+    font-size: 24px;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: white;
+    background-color: #c9302c;
+}
+
+.btn:hover {
+    background-color: #a9100c;
+}
+
+.btn:active {
+    background-color: #99000c;
+}
+
+#savediv .btn {
+    background-color: #f9e000;
+}
+
+#savediv .btn:hover {
+    background-color: #f5d500;
+}
+
+#savediv .btn:active {
+    background-color: #e5c500;
+}
+
+a {
+    text-decoration: none;
+    color: #838383;
+}
+
+#ack {
+    font-size: 14px;
+}

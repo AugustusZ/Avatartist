@@ -7,14 +7,13 @@
     <title>Avatartist</title>
     <link rel='shortcut icon' href='favicon.ico' type='image/x-icon' />
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <link rel="stylesheet" type="text/css" media="only screen and (max-width: 500px)" href="style_mobi.css" />
 </head>
 
 <body onload="preload()">
     <div id="main">
-        <h1 id="header">Two steps to feature your avatar!</h1>
+        <h1 id="header">Feature your avatar online!</h1>
         <div id="desc">
-
+            <br>
         </div>
         <div id="uploaddiv">
             <div class="fileUpload btn">
@@ -26,7 +25,7 @@
         <!--        <a id="downloadImage">-->
         <canvas id="canvas" width="750" height="750"></canvas>
         <!--        </a>-->
-        <!--        <br>-->
+        <br>
         <div id="submitdiv">
             <div class="fileUpload btn">
                 <span>Process</span>
@@ -143,7 +142,7 @@
             //            document.getElementById("downloadImage").href = canvas.toDataURL('image/jpeg', 0.5);
             //            document.getElementById("downloadImage").download = "HCNY_" + filename;
 
-            document.getElementById("saveanchor").href = canvas.toDataURL('image/jpeg', 0.5);
+            document.getElementById("saveanchor").href = canvas.toDataURL('image/jpeg', 0.6);
             document.getElementById("saveanchor").download = "HCNY_" + filename;
 
             // cannot resubmit
