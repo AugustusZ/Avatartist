@@ -27,3 +27,6 @@ A online tool to feature your black white avatars and [here](http://www-scf.usc.
 
 ## See Also 
 See my complete avatar [portfolio](http://www.coroflot.com/yankuan/avatars) made with ❤️ in Los Angeles.
+
+## Acknowledgement 
+Special thanks to **Jibin Lyu** for this project.
