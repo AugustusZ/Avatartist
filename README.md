@@ -18,8 +18,7 @@ A online tool to feature your black white avatars and [here](http://www-scf.usc.
 
 ## Note
 1. Optimized for mobile end.
-2. All client-side implementation.
-3. Click / tap the generated image to save it.
+2. All client-side implementation with JavaScript.
 
 ## Oops...
 1. It is said it doesn't work well for Android native browsers.
