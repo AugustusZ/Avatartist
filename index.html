@@ -2,66 +2,90 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
     <meta name="author" content="Yankuan Zhang">
     <title>Avatartist</title>
+
     <link rel='shortcut icon' href='favicon.ico' type='image/x-icon' />
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Latest compiled and minified jQuery -->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
 </head>
 
-<body onload="preload()">
-    <div id="bodydiv">
-        <div id="main">
-            <div id="opendiv">
-                <h1 id="header">Feature Your Avatars Online</h1>
-                <div class="desc">
-                    <br>
-                </div>
-                <div id="uploaddiv">
-                    <div class="fileUpload btn">
-                        <div id="uploadicon" class="icon"></div>
-                        <input type="file" class="button" id="uploadImage" accept="image/*" onchange="previewImage()" />
-                    </div>
-                </div>
-            </div>
-            <div id="canvasdiv">
-                <canvas id="canvas" width="750" height="750"></canvas>
-            </div>
+<body>
+    <div id="loading"> </div>
+    <div id="bodydiv" class="container">
+        <div id="prelude">
+            <button id="upload" class="btn btn-danger btn-lg">
+                <span class="glyphicon glyphicon-upload"></span> 上传
+            </button>
+            <input id="upload-input" type="file" accept="image/*">
+        </div>
 
-            <div id="submitdiv">
-                <div class="fileUpload btn">
-                    <div id="processicon" class="icon"></div>
-                    <input id="submit" class="button" type="submit" onclick="doit()" />
+        <div id="canvas-div" class="container">
+            <canvas id="canvas"></canvas>
+            <div id="palette" class="container">
+                <div>
+                    <button id="backgroundcolor-w" class="btn btn-secondary-outline btn-lg color-btn">白</button>
+                    <button id="backgroundcolor-k" class="btn btn-black-outline btn-lg color-btn">黑</button>
+                </div>
+                <div>
+                    <button id="backgroundcolor-r" class="btn btn-danger-outline btn-lg color-btn">红</button>
+                    <button id="backgroundcolor-b" class="btn btn-primary-outline btn-lg color-btn">蓝</button>
+                    <button id="backgroundcolor-g" class="btn btn-success-outline btn-lg color-btn">绿</button>
                 </div>
             </div>
-            <div id="savediv">
-                <a id="saveanchor">
-                    <div class="fileUpload btn">
-                        <div id="saveicon" class="icon"></div>
-                    </div>
-                </a>
-            </div>
         </div>
-        <div class="desc">
-            <br>
+
+        <div id="submit-div">
+            <a id="saveanchor">
+                <button id="download" class="btn btn-danger btn-lg">
+                    <span class="glyphicon glyphicon-download"></span> 下载
+                </button>
+            </a>
         </div>
+
         <div id="ack">
-
             <hr>
             <br>
-            <span>Scan and donate for this project via Wechat</span>
-            <br>
+            <h1>微信扫码以支持该项目</h1>
             <br>
             <div>
-                <img src="wechat.jpg" />
+                <img src="wechatpay.jpg" />
             </div>
             <br>
         </div>
+
         <script>
-            function preload() {
+            $(function() {
+                // hide them
+                $("#submit-div").css("display", "none")
+                $("#save-div").css("display", "none");
+                $("#canvas-div").css("display", "none");
+                $("#ack").css("display", "none");
+
+
+                // set prelude position 
+                $("#prelude").offset({
+                    top: $(window).height() * .4
+                });
 
                 // global context
-                canvas = document.getElementById('canvas');
+                canvas = document.getElementById("canvas") // cannot use $("#") here
+                canvas.width = 800;
+                canvas.height = 800;
                 context = canvas.getContext('2d');
                 cW = canvas.width;
                 cH = canvas.height;
@@ -71,73 +95,111 @@
 
                 bk.src = "bk750.jpg";
                 bk.onload = function() {
+                    bk.crossOrigin = 'anonymous';
                     context.drawImage(bk, 0, 0, cW, cH);
-                    bkDataArray = context.getImageData(0, 0, cW, cH).data; //.slice(0);
+                    bkDataArray = context.getImageData(0, 0, cW, cH).data;
                     context.clearRect(0, 0, cW, cH);
                 }
 
                 fr.src = "fr750.jpg";
                 fr.onload = function() {
+                    fr.crossOrigin = 'anonymous';
                     context.drawImage(fr, 0, 0, cW, cH);
-                    frDataArray = context.getImageData(0, 0, cW, cH).data; //.slice(0);
+                    frDataArray = context.getImageData(0, 0, cW, cH).data;
                     context.clearRect(0, 0, cW, cH);
                 }
 
-                // notification
-                console.log("two gound images are ready.");
+                $("#loading").css("display", "none");
+            });
 
-                // disable "submit" button
-                document.getElementById("submit").disabled = true;
+            $("#upload").click(function() {
+                $("#upload-input").click()
+            })
 
-                // hide them
-                document.getElementById("submitdiv").style.display = "none";
-                document.getElementById("savediv").style.display = "none";
-                document.getElementById("ack").style.display = "none";
-                document.getElementById("canvas").style.display = "none";
-
-
-
-            }
-
-            function previewImage() {
+            $("#upload-input").on("change", function() {
                 var im = new Image();
 
                 var oFReader = new FileReader();
-                oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
-                filename = document.getElementById("uploadImage").files[0].name;
+                oFReader.readAsDataURL($("#upload-input").get(0).files[0]);
+                filename = $("#upload-input").get(0).files[0].name;
                 oFReader.onload = function(oFREvent) {
-                        var userImageSrc = oFREvent.target.result;
-                        im.src = userImageSrc;
-                        im.onload = function() {
-                            context.drawImage(im, 0, 0, cW, cH);
-                            imDataArray = context.getImageData(0, 0, cW, cH).data; //.slice(0);
-                        }
+                    var userImageSrc = oFREvent.target.result;
+                    im.src = userImageSrc;
+                    im.onload = function() {
+                        context.drawImage(im, 0, 0, cW, cH);
+                        imDataArray = context.getImageData(0, 0, cW, cH).data;
+                        imDataArraySource = context.getImageData(0, 0, cW, cH).data;
                     }
-                    // now user can submit
-                document.getElementById("submit").disabled = false;
+                }
 
                 // show them
-                document.getElementById("submitdiv").style.display = "initial";
-                document.getElementById("savediv").style.display = "none";
-                document.getElementById("canvas").style.display = "initial";
-                //            document.getElementById("downloadImage").style.display = "initial";
-                document.getElementById("header").style.display = "none";
-                document.getElementById("opendiv").style.top = "0%";
+                $("#submit-div").css("display", "initial");
+                $("#save-div").css("display", "none");
+                $("#canvas-div").css("display", "initial");
+
+                // set prelude position 
+                $("#prelude").css("top", "0%")
+            })
+
+            function styleBlackButton(flag) {
+                if (flag === "on") {
+                    $("#backgroundcolor-k").css("background-color", "black");
+                    $("#backgroundcolor-k").css("color", "white");
+                } else {
+                    $("#backgroundcolor-k").css("background-color", "white");
+                    $("#backgroundcolor-k").css("color", "black");
+                }
             }
 
-            function doit() {
+            $(".color-btn").click(function() {
+
+                $("#ack").css("display", "initial");
+
+                var color = $(this).attr("id");
+                console.debug(color);
+
+                if (color == "backgroundcolor-k") {
+                    styleBlackButton("on");
+                } else {
+                    styleBlackButton("off");
+                }
 
                 // core algorithm
-                for (var i = 0; i < imDataArray.length; i++) {
-                    if (imDataArray[i] < 170) { // this value is proposed by Jibin
-                        imDataArray[i] = frDataArray[i];
+                for (var i = 0; i < imDataArray.length; i += 4) {
+                    if (imDataArraySource[i] < 170) { // this value is proposed by Jibin
+                        imDataArray[i + 0] = frDataArray[i + 0]; // r
+                        imDataArray[i + 1] = frDataArray[i + 1]; // g
+                        imDataArray[i + 2] = frDataArray[i + 2]; // b
+                        imDataArray[i + 3] = frDataArray[i + 3]; // a
                     } else {
-                        imDataArray[i] = bkDataArray[i];
+                        if (color == "backgroundcolor-r") {
+                            imDataArray[i + 0] = bkDataArray[i + 0]; // r
+                            imDataArray[i + 1] = bkDataArray[i + 1]; // g
+                            imDataArray[i + 2] = bkDataArray[i + 2]; // b
+                        } else if (color == "backgroundcolor-g") {
+                            imDataArray[i + 0] = bkDataArray[i + 1]; // r
+                            imDataArray[i + 1] = bkDataArray[i + 0] - 50; // g
+                            imDataArray[i + 2] = bkDataArray[i + 2]; // b
+                        } else if (color == "backgroundcolor-b") {
+                            imDataArray[i + 0] = bkDataArray[i + 2]; // r
+                            imDataArray[i + 1] = bkDataArray[i + 1]; // g
+                            imDataArray[i + 2] = bkDataArray[i + 0]; // b
+                        } else if (color == "backgroundcolor-w") {
+                            imDataArray[i + 0] = 255; // r
+                            imDataArray[i + 1] = 255; // g
+                            imDataArray[i + 2] = 255; // b
+                        } else if (color == "backgroundcolor-k") {
+                            var gray = Math.round((bkDataArray[i + 0] + bkDataArray[i + 1] + bkDataArray[i + 0]) / 3) - 130;
+                            imDataArray[i + 0] = gray; // r
+                            imDataArray[i + 1] = gray; // g
+                            imDataArray[i + 2] = gray; // b
+                        }
+                        imDataArray[i + 3] = bkDataArray[i + 3]; // a
                     }
                 }
 
                 // notification
-                console.log("new image is computed.");
+                console.debug("new image is computed.");
 
                 context.clearRect(0, 0, cW, cH);
 
@@ -145,17 +207,20 @@
                 context.putImageData(new ImageData(imDataArray, cW, cH), 0, 0, 0, 0, cW, cH);
 
                 document.getElementById("saveanchor").href = canvas.toDataURL('image/jpeg', 0.6);
-                document.getElementById("saveanchor").download = "HCNY_" + filename;
+                document.getElementById("saveanchor").download = color.substring(color.length - 1) + "_" + filename;
 
-                // cannot resubmit
-                document.getElementById("submit").disabled = true;
-                document.getElementById("ack").style.display = "initial";
-                document.getElementById("submitdiv").style.display = "none";
-                document.getElementById("savediv").style.display = "initial";
-            }
+                $("#ack").css("display", "initial");
+                $("#submit-div").css("display", "initial");
+                $("#save-div").css("display", "initial");
+            })
 
         </script>
     </div>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>-->
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+
+
 </body>
 
 </html>

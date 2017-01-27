@@ -4,6 +4,18 @@
 
 A online tool to feature your black white avatars and [here](http://www-scf.usc.edu/~yankuanz/avatartist/) it is.
 
+## 🎉 Version 2 is released! 🎉
+### New features:
+1. More background colors besides original **Real Red**:
+	- **Why White**
+	- **Back Black**
+	- **Great Green**
+	- **Blah Blue**
+2. Improved front-ground color **Yolo Yellow**
+2. Donation QR code provided for benefitted users.
+3. Redesigned UI.
+4. Now it is in Chinese!
+
 ## Source Images
 ### Foreground Image
 ![](fr750.jpg)
