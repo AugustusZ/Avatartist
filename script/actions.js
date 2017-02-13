@@ -21,7 +21,7 @@ $(function() {
     var bk = new Image();
     var fr = new Image();
 
-    bk.src = "bk800.jpg";
+    bk.src = "img/bk800.jpg";
     bk.onload = function() {
         bk.crossOrigin = 'anonymous';
         context.drawImage(bk, 0, 0, cW, cH);
@@ -29,7 +29,7 @@ $(function() {
         context.clearRect(0, 0, cW, cH);
     }
 
-    fr.src = "fr800.jpg";
+    fr.src = "img/fr800.jpg";
     fr.onload = function() {
         fr.crossOrigin = 'anonymous';
         context.drawImage(fr, 0, 0, cW, cH);
