@@ -11,7 +11,7 @@ A online tool to feature your black white avatars and [here](http://www-scf.usc.
 1. More background colors besides original **Real Red**:
 	- **Why White**
 	- **Box Black**
-	- **Great Green**
+	- **Greedy Green**
 	- **Boo Blue**
 2. Improved frontground color **Yolo Yellow**
 3. Donation QR code provided for benefitted users.
@@ -33,10 +33,10 @@ a user can select background color to generate corresponding image:
 | Background Color | Generated Image |
 |:-------------:|:-------------:|
 |Why White|<img src="demo/w_Lexicaholic.jpg" width=250 style="border:1px solid #eee">|
-|Back Black|<img src="demo/k_Lexicaholic.jpg" width=250 style="border:1px solid #eee">|
+|Box Black|<img src="demo/k_Lexicaholic.jpg" width=250 style="border:1px solid #eee">|
 |Real Red|<img src="demo/r_Lexicaholic.jpg" width=250 style="border:1px solid #eee">|
-|Blah Blue|<img src="demo/b_Lexicaholic.jpg" width=250 style="border:1px solid #eee">|
-|Great Green|<img src="demo/g_Lexicaholic.jpg" width=250 style="border:1px solid #eee">|
+|Boo Blue|<img src="demo/b_Lexicaholic.jpg" width=250 style="border:1px solid #eee">|
+|Greedy Green|<img src="demo/g_Lexicaholic.jpg" width=250 style="border:1px solid #eee">|
 
 ## Note
 1. Optimized for mobile end.
