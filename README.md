@@ -10,9 +10,9 @@ A online tool to feature your black white avatars and [here](http://www-scf.usc.
 
 1. More background colors besides original **Real Red**:
 	- **Why White**
-	- **Back Black**
+	- **Box Black**
 	- **Great Green**
-	- **Blah Blue**
+	- **Boo Blue**
 2. Improved frontground color **Yolo Yellow**
 3. Donation QR code provided for benefitted users.
 4. Redesigned UI.
@@ -21,22 +21,22 @@ A online tool to feature your black white avatars and [here](http://www-scf.usc.
 ## Source Images
 | Foreground | Background |
 |:-------------:|:-------------:|
-|<img src="img/fr800.jpg" width=250>|<img src="img/bk800.jpg" width=250>|
+|<img src="img/fr800.jpg" width=250 style="border:1px solid #eee">|<img src="img/bk800.jpg" width=250 style="border:1px solid #eee">|
 
 ## An Example
 Given image uploaded:
 
-<img src="demo/Lexicaholic.jpg" width=250>
+<img src="demo/Lexicaholic.jpg" width=250 style="border:1px solid #eee">
 
 a user can select background color to generate corresponding image:
 
 | Background Color | Generated Image |
 |:-------------:|:-------------:|
-|Why White|<img src="demo/w_Lexicaholic.jpg" width=250>|
-|Back Black|<img src="demo/k_Lexicaholic.jpg" width=250>|
-|Real Red|<img src="demo/r_Lexicaholic.jpg" width=250>|
-|Blah Blue|<img src="demo/b_Lexicaholic.jpg" width=250>|
-|Great Green|<img src="demo/g_Lexicaholic.jpg" width=250>|
+|Why White|<img src="demo/w_Lexicaholic.jpg" width=250 style="border:1px solid #eee">|
+|Back Black|<img src="demo/k_Lexicaholic.jpg" width=250 style="border:1px solid #eee">|
+|Real Red|<img src="demo/r_Lexicaholic.jpg" width=250 style="border:1px solid #eee">|
+|Blah Blue|<img src="demo/b_Lexicaholic.jpg" width=250 style="border:1px solid #eee">|
+|Great Green|<img src="demo/g_Lexicaholic.jpg" width=250 style="border:1px solid #eee">|
 
 ## Note
 1. Optimized for mobile end.
