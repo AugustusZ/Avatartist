@@ -2,7 +2,7 @@
 
 *This project is for my beloved clients ordering black and white avatars from me.* ❤️
 
-A online tool to feature your black white avatars and [here](http://www-scf.usc.edu/~yankuanz/avatartist/) it is.
+A online tool to feature your black white avatars and <s>[here](http://www-scf.usc.edu/~yankuanz/avatartist/)</s> (actually [here](https://augustusz.github.io/Avatartist/)) it is.
 
 ## 🎉 Version 2 is released! 🎉
 ### New features:
